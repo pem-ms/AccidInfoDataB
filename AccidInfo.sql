@@ -9,7 +9,8 @@ create table Personne (
   prenom text not null,   
   adress text not null, 
   age integer not null,
-  primary key (codePers)
+  primary key (codePers),
+  unique(nom)
 );
 
 create table Vehicule (
@@ -55,10 +56,6 @@ create table Blesse (
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
-
 commit;
-
-
-
 
 
