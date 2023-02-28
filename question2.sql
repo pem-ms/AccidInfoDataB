@@ -8,7 +8,7 @@ create table Personne (
   nom text not null,  
   prenom text not null,   
   adress text, 
-  age integer not null,
+  age integer not null CHECK(age>=18),
   primary key (codePers),
   unique(nom)
 );
@@ -32,7 +32,7 @@ create table Conducteur (
 create table Accident (
   codeAcc text not null,
   date timestamp,   
-  dept text not null, 
+  dept text not null CHECK(CAST (dept AS integer) BETWEEN 1 AND 80 ), 
   primary key (codeAcc)
 );
 
