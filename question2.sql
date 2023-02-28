@@ -24,7 +24,7 @@ create table Conducteur (
   codePers text,
   codeVeh text,   
   nbacc integer not null, 
-  primary key (codePers),
+  --primary key (codePers),
   foreign key (codePers) references Personne(codePers) ,
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
@@ -40,7 +40,7 @@ create table VEHPART (
   codeAcc text,
   codeVeh text,   
   nCond text not null, 
-  primary key (codeAcc, codeVeh),
+  --primary key (codeAcc, codeVeh),
   foreign key (codeAcc) references Accident(codeAcc) ,
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
@@ -50,7 +50,7 @@ create table Blesse (
   codePers text,
   codeVeh text,
   gravite text not null, 
-  primary key (codeAcc, codePers),
+  --primary key (codeAcc, codePers),
   foreign key (codeAcc) references Accident(codeAcc) ,
   foreign key (codePers) references Personne(codePers) ,	
   foreign key (codeVeh) references Vehicule(codeVeh)
@@ -58,8 +58,5 @@ create table Blesse (
 
 
 commit;
-
-
-
 
 
