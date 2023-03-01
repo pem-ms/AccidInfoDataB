@@ -4,52 +4,52 @@ create schema AccidInfo;
 set search_path to AccidInfo;
 
 create table Personne (
-  codePers serial not null,
+  codePers serial,
   nom text not null,  
   prenom text not null,   
   adress text not null, 
-  age integer not null CHECK(age>=18),
+  age integer CHECK(age>=18),
   primary key (codePers),
   unique(nom)
 );
 
 create table Vehicule (
-  codeVeh integer not null,
+  codeVeh integer,
   marque text not null,   
-  typeV text not null, 
+  typeV text, 
   primary key (codeVeh)
 );
 
 create table Conducteur (
-  codePers serial,
-  codeVeh integer,   
-  nbacc integer not null, 
+  codePers,
+  codeVeh,   
+  nbacc integer, 
   --primary key (codePers),
   foreign key (codePers) references Personne(codePers) ,
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
 create table Accident (
-  codeAcc integer not null,
+  codeAcc integer,
   date timestamp,   
   dept text not null CHECK(CAST (dept AS integer) BETWEEN 1 AND 80 ), 
   primary key (codeAcc)
 );
 
 create table VEHPART (
-  codeAcc integer,
-  codeVeh integer,   
-  nCond integer not null, 
+  codeAcc,
+  codeVeh,   
+  nCond integer, 
   --primary key (codeAcc, codeVeh),
   foreign key (codeAcc) references Accident(codeAcc) ,
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
 create table Blesse (
-  codeAcc integer,
-  codePers serial,
-  codeVeh integer,
-  gravite text not null, 
+  codeAcc,
+  codePers,
+  codeVeh,
+  gravite text, 
   --primary key (codeAcc, codePers),
   foreign key (codeAcc) references Accident(codeAcc) ,
   foreign key (codePers) references Personne(codePers) ,	
