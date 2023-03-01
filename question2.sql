@@ -4,7 +4,7 @@ create schema AccidInfo;
 set search_path to AccidInfo;
 
 create table Personne (
-  codePers serial,
+  codePers text,
   nom text not null,  
   prenom text not null,   
   adress text, 
@@ -14,7 +14,7 @@ create table Personne (
 );
 
 create table Vehicule (
-  codeVeh integer,
+  codeVeh text,
   marque text not null,   
   typeV text, 
   primary key (codeVeh)
@@ -30,7 +30,7 @@ create table Conducteur (
 );
 
 create table Accident (
-  codeAcc integer,
+  codeAcc text,
   date timestamp,   
   dept text not null CHECK(CAST (dept AS integer) BETWEEN 1 AND 80 ), 
   primary key (codeAcc)
