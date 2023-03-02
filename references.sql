@@ -51,12 +51,12 @@ create table Blesse (
   codeVeh text,
   gravite text, 
   --primary key (codeAcc, codePers),
-  CONSTRAINT bles foreign key (codeAcc) references Accident(codeAcc) ,
+  CONSTRAINT codeAccident foreign key (codeAcc) references Accident(codeAcc) ,
   foreign key (codePers) references Personne(codePers) ,	
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
-ALTER TABLE Blesse DROP CONSTRAINT bles; -- pour supprimer la clé étrangere
+ALTER TABLE Blesse DROP CONSTRAINT codeAccident; -- pour supprimer la clé étrangere
 
 INSERT INTO Personne VALUES ('00001','Darius','Rochebin','Montreal, QC',45);
 INSERT INTO Personne VALUES ('00002','Alexandre','Melnik',NULL,55);
@@ -117,6 +117,6 @@ INSERT INTO Blesse VALUES ('159753260', '00006', '13012073','Fatale');
 
 delete from Blesse where codeAcc = '159753260';
 -- remise de la contrainte de la clé étrangère
-ALTER TABLE Blesse ADD CONSTRAINT bles foreign key (codeAcc) references Accident(codeAcc);
+ALTER TABLE Blesse ADD CONSTRAINT codeAccident foreign key (codeAcc) references Accident(codeAcc);
 
 commit;
