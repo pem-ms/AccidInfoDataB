@@ -23,8 +23,8 @@ create table Vehicule (
 create table Conducteur (
   codePers text,
   codeVeh text,   
-  nbacc integer 
-  primary key (codePers,codeVeh),
+  nbacc integer,
+  primary key (codePers,codeVeh)
 );
 
 create table Accident (
@@ -37,16 +37,16 @@ create table Accident (
 create table VEHPART (
   codeAcc text,
   codeVeh text,   
-  nCond integer 
-  primary key (codeAcc, codeVeh),
+  nCond integer,
+  primary key (codeAcc, codeVeh)
 );
 
 create table Blesse (
   codeAcc text,
   codePers text,
   codeVeh text,
-  gravite text
-  primary key (codeAcc, codePers),
+  gravite text,
+  primary key (codeAcc, codePers)
 );
 
 INSERT INTO Personne VALUES ('00001','Darius','Rochebin','Montreal, QC',45);
