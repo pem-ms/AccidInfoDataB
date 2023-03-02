@@ -23,8 +23,8 @@ create table Vehicule (
 create table Conducteur (
   codePers serial,
   codeVeh integer,   
-  nbacc integer 
-  --primary key (codePers),
+  nbacc integer,
+  primary key (codePers, codeVeh)
 );
 
 create table Accident (
@@ -37,16 +37,16 @@ create table Accident (
 create table VEHPART (
   codeAcc integer,
   codeVeh integer,   
-  nCond integer 
-  --primary key (codeAcc, codeVeh),
+  nCond integer,
+  primary key (codeAcc, codeVeh)
 );
 
 create table Blesse (
   codeAcc integer,
   codePers serial,
   codeVeh integer,
-  gravite text
-  --primary key (codeAcc, codePers),
+  gravite text,
+  primary key (codeAcc, codePers)
 );
 
 commit;
