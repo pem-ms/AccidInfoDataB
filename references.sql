@@ -117,10 +117,10 @@ INSERT INTO Blesse VALUES ('159753260', '00006', '13012073','Fatale');
 
 -- L’enregistrement qui cause le problème est la suivante :
 --INSERT INTO Blesse VALUES ('159753260', '00006', '13012073','Fatale')
---Car '159753260' correspond à une clé à la fois étrangère et primaire N°ACC
---de la table Blessé. Or N°ACC est à la base une clé primaire de la table Accident
---et cette clé ne figure pas dans ses enregistrements, donc '159753260' ne peut pas
---être une clé étrangère de la table Blessé si elle n’est pas parmi les clés primaires d’Accident.
+--Car '159753260' est une clé étrangère codeAcc de la table Blessé,or à la base
+--codeAcc est à la base une clé primaire de la table Accident et cette clé ne figure
+--pas dans ses enregistrements, donc '159753260' ne peut pas être une clé étrangère de
+--la table Blessé si elle n’est pas parmi les clés primaires d’Accident.
 
 delete from Blesse where codeAcc = '159753260';
 -- remise de la contrainte de la clé étrangère
