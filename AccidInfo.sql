@@ -21,12 +21,10 @@ create table Vehicule (
 );
 
 create table Conducteur (
-  codePers,
-  codeVeh,   
-  nbacc integer, 
+  codePers serial,
+  codeVeh integer,   
+  nbacc integer 
   --primary key (codePers),
-  foreign key (codePers) references Personne(codePers) ,
-  foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
 create table Accident (
@@ -37,23 +35,18 @@ create table Accident (
 );
 
 create table VEHPART (
-  codeAcc,
-  codeVeh,   
-  nCond integer, 
+  codeAcc integer,
+  codeVeh integer,   
+  nCond integer 
   --primary key (codeAcc, codeVeh),
-  foreign key (codeAcc) references Accident(codeAcc) ,
-  foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
 create table Blesse (
-  codeAcc,
-  codePers,
-  codeVeh,
-  gravite text, 
+  codeAcc integer,
+  codePers serial,
+  codeVeh integer,
+  gravite text
   --primary key (codeAcc, codePers),
-  foreign key (codeAcc) references Accident(codeAcc) ,
-  foreign key (codePers) references Personne(codePers) ,	
-  foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
 commit;
