@@ -1,7 +1,7 @@
 begin transaction;
-DROP SCHEMA IF EXISTS devoir CASCADE;
-create schema devoir;
-set search_path to devoir;
+DROP SCHEMA IF EXISTS AccidInfo CASCADE;
+create schema AccidInfo;
+set search_path to AccidInfo;
 
 create table Personne (
   codePers text,
