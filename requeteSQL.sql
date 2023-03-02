@@ -11,8 +11,9 @@ WITH r1 as (WITH r2 as( SELECT * FROM blesse NATURAL JOIN accident)
 SELECT * FROM r2 WHERE date = '2023-02-14' and gravite='Grave') 
 SELECT nom, prenom, age from personne NATURAL JOIN r1;
 --4
-with r0 as (with r1 as (  WITH r2 as( 
-  SELECT * FROM blesse NATURAL JOIN accident) 
-  SELECT * FROM r2 WHERE date::text LIKE '2022%' AND gravite='Fatale') 
-  SELECT * FROM vehicule NATURAL JOIN r1 WHERE marque = 'Volkswagen') 
-  SELECT COUNT(dept) AS nbofaccident FROM r0;
+with r as ( with r0 as (with r1 as (  WITH r2 as( 
+SELECT * FROM blesse NATURAL JOIN accident) 
+SELECT * FROM r2 WHERE date::text LIKE '2022%' and gravite = 'Fatale') 
+SELECT * FROM vehicule NATURAL JOIN r1 WHERE marque = 'Volkswagen') 
+SELECT * FROM conducteur NATURAL JOIN r0) 
+SELECT sum(nbacc) as nbaccident, dept FROM r GROUP BY dept;
