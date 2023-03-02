@@ -24,7 +24,7 @@ create table Conducteur (
   codePers text,
   codeVeh text,   
   nbacc integer, 
-  --primary key (codePers),
+  primary key (codePers, codeVeh),
   foreign key (codePers) references Personne(codePers) ,
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
@@ -40,7 +40,7 @@ create table VEHPART (
   codeAcc text,
   codeVeh text,   
   nCond integer, 
-  --primary key (codeAcc, codeVeh),
+  primary key (codeAcc, codeVeh),
   foreign key (codeAcc) references Accident(codeAcc) ,
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
@@ -50,7 +50,7 @@ create table Blesse (
   codePers text,
   codeVeh text,
   gravite text, 
-  --primary key (codeAcc, codePers),
+  primary key (codeAcc, codePers),
   CONSTRAINT codeAccident foreign key (codeAcc) references Accident(codeAcc) ,
   foreign key (codePers) references Personne(codePers) ,	
   foreign key (codeVeh) references Vehicule(codeVeh)
@@ -114,6 +114,13 @@ INSERT INTO Blesse VALUES ('159753253', '00007', '13012071','Légère');
 INSERT INTO Blesse VALUES ('159753254', '00004', '13012094','Bénigne');
 INSERT INTO Blesse VALUES ('159753255', '00005', '13012094','Fatale');
 INSERT INTO Blesse VALUES ('159753260', '00006', '13012073','Fatale');
+
+-- L’enregistrement qui cause le problème est la suivante :
+--INSERT INTO Blesse VALUES ('159753260', '00006', '13012073','Fatale')
+--Car '159753260' correspond à une clé à la fois étrangère et primaire N°ACC
+--de la table Blessé. Or N°ACC est à la base une clé primaire de la table Accident
+--et cette clé ne figure pas dans ses enregistrements, donc '159753260' ne peut pas
+--être une clé étrangère de la table Blessé si elle n’est pas parmi les clés primaires d’Accident.
 
 delete from Blesse where codeAcc = '159753260';
 -- remise de la contrainte de la clé étrangère
