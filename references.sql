@@ -4,25 +4,24 @@ create schema AccidInfo;
 set search_path to AccidInfo;
 
 create table Personne (
-  codePers text,
+  codePers text not null,
   nom text not null,  
   prenom text not null,   
   adress text, 
   age integer CHECK(age>=18),
-  primary key (codePers),
-  unique(nom)
+  primary key (codePers)
 );
 
 create table Vehicule (
-  codeVeh text,
+  codeVeh text not null,
   marque text not null,   
   typeV text, 
   primary key (codeVeh)
 );
 
 create table Conducteur (
-  codePers text,
-  codeVeh text,   
+  codePers text not null,
+  codeVeh text not null,   
   nbacc integer, 
   primary key (codePers, codeVeh),
   foreign key (codePers) references Personne(codePers) ,
@@ -30,15 +29,15 @@ create table Conducteur (
 );
 
 create table Accident (
-  codeAcc text,
+  codeAcc text not null,
   date timestamp,   
   dept text not null CHECK(CAST (dept AS integer) BETWEEN 1 AND 80 ), 
   primary key (codeAcc)
 );
 
 create table VEHPART (
-  codeAcc text,
-  codeVeh text,   
+  codeAcc text not null,
+  codeVeh text not null,   
   nCond integer, 
   primary key (codeAcc, codeVeh),
   foreign key (codeAcc) references Accident(codeAcc) ,
@@ -46,9 +45,9 @@ create table VEHPART (
 );
 
 create table Blesse (
-  codeAcc text,
-  codePers text,
-  codeVeh text,
+  codeAcc text not null,
+  codePers text not null,
+  codeVeh text not null,
   gravite text, 
   primary key (codeAcc, codePers),
   CONSTRAINT codeAccident foreign key (codeAcc) references Accident(codeAcc) ,
@@ -122,7 +121,9 @@ INSERT INTO Blesse VALUES ('159753260', '00006', '13012073','Fatale');
 --pas dans ses enregistrements, donc '159753260' ne peut pas être une clé étrangère de
 --la table Blessé si elle n’est pas parmi les clés primaires d’Accident.
 
-delete from Blesse where codeAcc = '159753260';
+-- suppression de la clé étrangere qui n'a pas de clé primaire
+delete from Blesse where codeAcc NOT IN (select codeAcc from Accident);
+
 -- remise de la contrainte de la clé étrangère
 ALTER TABLE Blesse ADD CONSTRAINT codeAccident foreign key (codeAcc) references Accident(codeAcc);
 
