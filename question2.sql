@@ -4,47 +4,46 @@ create schema AccidInfo;
 set search_path to AccidInfo;
 
 create table Personne (
-  codePers text,
+  codePers text not null,
   nom text not null,  
   prenom text not null,   
   adress text, 
   age integer CHECK(age>=18),
-  primary key (codePers),
-  unique(nom)
+  primary key (codePers)
 );
 
 create table Vehicule (
-  codeVeh text,
+  codeVeh text not null,
   marque text not null,   
   typeV text, 
   primary key (codeVeh)
 );
 
 create table Conducteur (
-  codePers text,
-  codeVeh text,   
+  codePers text not null,
+  codeVeh text not null,   
   nbacc integer,
   primary key (codePers,codeVeh)
 );
 
 create table Accident (
-  codeAcc text,
+  codeAcc text not null,
   date timestamp,   
   dept text not null CHECK(CAST (dept AS integer) BETWEEN 1 AND 80 ), 
   primary key (codeAcc)
 );
 
 create table VEHPART (
-  codeAcc text,
-  codeVeh text,   
+  codeAcc text not null,
+  codeVeh text not null,   
   nCond integer,
   primary key (codeAcc, codeVeh)
 );
 
 create table Blesse (
-  codeAcc text,
-  codePers text,
-  codeVeh text,
+  codeAcc text not null,
+  codePers text not null,
+  codeVeh text not null,
   gravite text,
   primary key (codeAcc, codePers)
 );
