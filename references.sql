@@ -55,7 +55,9 @@ create table Blesse (
   foreign key (codeVeh) references Vehicule(codeVeh)
 );
 
-ALTER TABLE Blesse DROP CONSTRAINT codeAccident; -- pour supprimer la clé étrangere
+
+-- pour supprimer la clé étrangere qui n'a pas de clé primaire
+ALTER TABLE Blesse DROP CONSTRAINT codeAccident; 
 
 INSERT INTO Personne VALUES ('00001','Darius','Rochebin','Montreal, QC',45);
 INSERT INTO Personne VALUES ('00002','Alexandre','Melnik',NULL,55);
@@ -121,10 +123,10 @@ INSERT INTO Blesse VALUES ('159753260', '00006', '13012073','Fatale');
 --pas dans ses enregistrements, donc '159753260' ne peut pas être une clé étrangère de
 --la table Blessé si elle n’est pas parmi les clés primaires d’Accident.
 
--- suppression de la clé étrangere qui n'a pas de clé primaire
+-- suppression de la clé étrangere qui pose problème
 delete from Blesse where codeAcc NOT IN (select codeAcc from Accident);
 
--- remise de la contrainte de la clé étrangère
+-- remise de la contrainte code accident comme étant un clé étrangère dans blesse
 ALTER TABLE Blesse ADD CONSTRAINT codeAccident foreign key (codeAcc) references Accident(codeAcc);
 
 commit;
